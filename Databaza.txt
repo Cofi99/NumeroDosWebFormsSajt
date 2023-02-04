@@ -1,0 +1,44 @@
+create table equipmenttbl(
+eid int not null primary key identity (0,1),
+ename nvarchar(50) not null,
+emanufacturer nvarchar(50) not null,
+etype nvarchar(50) not null,
+ecost int not null)
+
+insert into equipmenttbl values('AK-47','Kalashikov Concern','Assault rifle',100)
+insert into equipmenttbl values('XM8','Heckler & Koch','Assault rifle',500)
+insert into equipmenttbl values('KV-2','Morozov','heavy tank',2500000)
+insert into equipmenttbl values('KV-1','Morozov','heavy tank',1250000)
+insert into equipmenttbl values('VK 45.01 (P)','Porsche','heavy tank',3450000)
+insert into equipmenttbl values('Elefant','Porsche','heavy tank destroyer',2800000)
+
+create table Shipment(
+shipid int not null primary key identity (100,100),
+eid int not null foreign key references equipmenttbl(eid),
+equantity int not null,
+eprice int not null)
+
+create table Factory(
+fid int not null primary key identity (30,30),
+fname nvarchar(50) not null,
+fyear int not null,
+flocation nvarchar(50) not null)
+
+insert into Factory values('Soviet Factories',50,'Ural')
+insert into Factory values('American Factories',60,'Ohio')
+insert into Factory values('German Factories',70,'Dresden')
+
+create table Production(
+eid int not null foreign key references equipmenttbl(eid),
+fid int not null foreign key references Factory(fid),
+primary key(eid,fid))
+
+insert into Production values(0,30)
+insert into Production values(2,30)
+insert into Production values(3,30)
+insert into Production values(1,60)
+insert into Production values(4,90)
+insert into Production values(5,90)
+
+
+
